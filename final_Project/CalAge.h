@@ -108,7 +108,49 @@ public:
 				price = seniorNightPrice;
 			}
 		}
-		std::cout << "가격은 " << price << "원 입니다.\n" << "감사합니다." << std::endl;
+
 	}
-	
+	int getPrice() {
+		return price;
+	}
+};
+class Significant : public Price
+{
+private:
+	int pprice;
+	int aa;
+	int result;
+public:
+	Significant(int day, int significant, int ResNum) : Price(day, ResNum) {
+
+		pprice = getPrice();
+
+		if (significant == 2) {
+			aa = (pprice * 40) / 100;
+			result = pprice - aa;
+			std::cout << "가격은 " << result << "원 입니다.\n" << "감사합니다." << std::endl;
+		}
+		else if (significant == 3) {
+			aa = (pprice * 50) / 100;
+			result = pprice - aa;
+			std::cout << "가격은 " << result << "원 입니다.\n" << "감사합니다." << std::endl;
+		}
+		else if (significant == 4) {
+			aa = (pprice * 20) / 100;
+			result = pprice - aa;
+			std::cout << "가격은 " << result << "원 입니다.\n" << "감사합니다." << std::endl;
+		}
+		else if (significant == 5) {
+			aa = (pprice * 15) / 100;
+			result = pprice - aa;
+			std::cout << "가격은 " << result << "원 입니다.\n" << "감사합니다." << std::endl;
+		}
+		else{
+			result = pprice;
+			std::cout << "가격은 " << result << "원 입니다.\n" << "감사합니다." << std::endl;
+		}
+		
+		
+	}
+
 };
