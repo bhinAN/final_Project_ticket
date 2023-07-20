@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include "Calage.h"
+#include <stdexcept>
 
 using namespace std;
 
@@ -9,6 +10,7 @@ int main()
 	int choice1, choice2, choiceEnd;
 	int residentNum;
 	int a, b;
+	int count;
 	while (1) {
 		cout << "권종을 선택하세요." << endl;
 		cout << "1. 주간권\n" << "2. 야간권" << endl;
@@ -30,6 +32,11 @@ int main()
 		cout << endl;
 		//주민번호 입력
 
+		cout << "몇개를 주문하시겠습니까?(최대 10개)." << endl;
+		cin >>count;
+		cout << endl;
+
+
 		cout << "우대상항을 선택하세요." << endl;
 		cout << "1. 없음\n" << "2. 장애인\n" << "3. 국가유공자\n" << 
 			"4. 다자녀\n" << "5. 임산부" << endl;
@@ -47,7 +54,7 @@ int main()
 		cout << endl;
 		//우대사항 선택
 
-		Significant P(choice1, choice2, residentNum);
+		Significant P(choice1, choice2, residentNum, count);
 		//class 호출
 
 		cout << "계속 발권 하시겠습니까?" << endl;
@@ -65,10 +72,11 @@ int main()
 		}
 
 		if (choiceEnd == 2) {
-			cout << "이용해주셔서 감사합니다.\n" << endl;
+			cout << "티켓 발권을 종료합니다. 감사합니다.\n" << endl;
 			break;
 		}
-		
+
 
 	}
+
 }

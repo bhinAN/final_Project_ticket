@@ -10,14 +10,22 @@ private:
 	int residentNumber;
 	int age, cal;
 	int a, b;
-	int date = 719;
-	int year = 2023;
+	int month;
+	int date;
+	int year;
 	
 
 public:
 	
 	CalAge(int ResNum) {
 		
+		std::time_t currentTime = std::time(nullptr);
+		std::tm localTime = *std::localtime(&currentTime);
+
+		year = localTime.tm_year + 1900;
+		month =(localTime.tm_mon + 1) *100;
+		date = month + localTime.tm_mday;
+
 		residentNumber = ResNum;
 		cal = residentNumber / 100000;
 
@@ -68,46 +76,60 @@ private:
 	int price;
 	int adultDayPrice = 56000, youthDayPrice =47000, childDayPrice = 44000, seniorDayPrice = 44000;
 	int adultNightPrice = 46000, youthNightPrice = 40000, childNightPrice = 37000, seniorNightPrice = 37000;
+	const int MaxCount = 10;
+	const int MinCount = 1;
+	int count;
 
 
 public:
-	Price(int day, int ResNum) : CalAge(ResNum) {
+	Price(int day, int ResNum, int ccount) : CalAge(ResNum) {
 
 		aage = getAge();
+		count = ccount;
+		if (count<MinCount || count>MaxCount) {
+			do {
+				cout << "권장 개수를 다시 입력해 주세요.(최대 10개)." << endl;
+				cin >> count;
+				if (count<MinCount || count>MaxCount) {
+					std::cout << "권장 개수를 다시 입력해 주세요.(최대 10개)." << endl;
+
+				}
+			} while (count<MinCount || count>MaxCount);
+		}
 
 		if (aage <= 2) {
 			price = 0;
 		}
 		else if (aage >= 3 && aage <= 12) {
 			if (day == 1) {
-				price = childDayPrice;
+				price = childDayPrice * count;
 			}
 			else if (day == 2) {
-				price = childNightPrice;
+				price = childNightPrice * count;
 			}
 		}
 		else if (aage >= 13 && aage <= 18) {
 			if (day == 1) {
-				price = youthDayPrice;
+				price = youthDayPrice * count;
 			}
 			else if (day == 2) {
-				price = youthNightPrice;
+				price = youthNightPrice * count;
 			}
 		}
 		else if (aage >= 19 && aage <= 64) {
 			if (day == 1) {
-				price = adultDayPrice;
+				price = adultDayPrice * count;
 			}
 			else if (day == 2) {
-				price = adultNightPrice;
+				price = adultNightPrice * count;
 			}
 		}
 		else if (aage >= 65) {
 			if (day == 1) {
-				price = seniorDayPrice;
+				price = seniorDayPrice * count;
 			}
 			else if (day == 2) {
-				price = seniorNightPrice;
+				price = seniorNightPrice * count;
 			}
 		}
 
@@ -123,7 +145,7 @@ private:
 	int aa;
 	int result;
 public:
-	Significant(int day, int significant, int ResNum) : Price(day, ResNum) {
+	Significant(int day, int significant, int ResNum, int count) : Price(day, ResNum, count) {
 
 		pprice = getPrice();
 
@@ -154,5 +176,14 @@ public:
 		
 		
 	}
+
+};
+class List
+{
+private:
+	
+
+
+public:
 
 };
