@@ -13,7 +13,8 @@ private:
 	int month;
 	int date;
 	int year;
-	
+	int year_month_date;
+
 
 public:
 	
@@ -26,6 +27,7 @@ public:
 		month =(localTime.tm_mon + 1) *100;
 		date = month + localTime.tm_mday;
 
+		year_month_date = (year * 10000) + date;
 		residentNumber = ResNum;
 		cal = residentNumber / 100000;
 
@@ -65,6 +67,9 @@ public:
 		return age;
 
 
+	}
+	int getDate() {
+		return year_month_date;
 	}
 };
 
@@ -144,6 +149,8 @@ private:
 	int pprice;
 	int aa;
 	int result;
+
+
 public:
 	Significant(int day, int significant, int ResNum, int count) : Price(day, ResNum, count) {
 
@@ -176,14 +183,54 @@ public:
 		
 		
 	}
+	int getPPrice() {
+		return pprice;
+	}
 
 };
-class List
+class List : public Significant
 {
 private:
-	
-
+	string dday;
+	string ssignificant;
+	int date;
+	int age;
+	int RResNum;
+	int ccount;
+	int pprice;
+	int* values; // 동적 배열로 저장할 값들을 위한 포인터
+	int size; // 현재 배열의 크기
+	int capacity; // 현재 할당된 메모리 공간의 크기
+	void resizeArray() {
+		// 배열의 크기를 2배로 늘림
+		capacity *= 2;
+		int* tempArray = new int[capacity];
+		for (int i = 0; i < size; ++i) {
+			tempArray[i] = values[i];
+		}
+		delete[] values;
+		values = tempArray;
+	}
 
 public:
+	List(int day, int significant, int ResNum, int count) : Significant(day, significant, ResNum, count) {
+		
+		date = getDate();
+		age = getAge();
+		pprice = getPPrice();
+
+		if (day == 1) {
+			dday = "주간권";
+		}
+		else if (day == 2) {
+			dday = "야간권";
+		}
+		if (significant == 1) {
+
+		}
+
+		capacity = 10;
+		
+	}
 
 };
